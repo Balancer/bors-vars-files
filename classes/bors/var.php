@@ -30,17 +30,15 @@ class bors_var
 
 		$file = COMPOSER_ROOT."/data/bors/vars/$name.json";
 
-		mkpath($file, 0777);
+		mkpath(dirname($file), 0777);
 
 		$expire = $time_to_live > 0 ? time() + $time_to_live : $time_to_live;
 
-		file_put_contents_lock($file, json_encode([
+		\B2\Files::put_lock($file, json_encode([
 			'name' => $name,
 			'value' => $value,
 			'expire_time' => $expire,
 		]));
-
-		chmod($file, 0666);
 
 		if($time_to_live > 0)
 			touch($file, time(), $expire);
