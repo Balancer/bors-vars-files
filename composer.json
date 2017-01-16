@@ -19,7 +19,7 @@
 	},
 
 	"require": {
-		"bors-core": "*"
+		"balancer/bors-core": "*"
 	},
 
 	"provide": {
